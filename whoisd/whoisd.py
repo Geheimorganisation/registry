@@ -6,10 +6,10 @@ config = {
 	'bind': '::',
 	'logging': logging.DEBUG,
 	'data-dirs': {
-		'person': 'person',
-		'aut-num': 'aut-num',
-		'inetnum': 'inetnum',
-		'route': 'route'
+		'person': '../person',
+		'aut-num': '../aut-num',
+		'inetnum': '../inetnum',
+		'route': '../route'
 	}
 }
 
@@ -28,6 +28,7 @@ class GeheimWhoisDealer(socketserver.BaseRequestHandler):
 	def handle(self):
 		data = self.request.recv(1024)
 		self.request.send(self.dealWithRequest(data))
+		self.request.send(b"\n% Saenk ju for traevelling wis Deutsche Bahn.")
 
 	def dealWithRequest(self, data):
 		out = ''
@@ -91,7 +92,7 @@ class GeheimWhoisDealer(socketserver.BaseRequestHandler):
 				pass
 
 		if not success:
-			out += "% No match found for '{0}'".format(
+			out += "% No match found for '{0}'\n".format(
 				str(data)
 			)
 
@@ -110,7 +111,6 @@ class GeheimWhoisDealer(socketserver.BaseRequestHandler):
 				path
 			)
 			out += open(path, 'r').read()
-			out += "\n\n"
 
 			# the route
 			try:
@@ -118,11 +118,10 @@ class GeheimWhoisDealer(socketserver.BaseRequestHandler):
 					config['data-dirs']['route'],
 					net
 				)
-				out += "% Information related to '{0}' \n\n".format(
+				out += "\n% Information related to '{0}' \n\n".format(
 					path
 				)
 				out += open(path, 'r').read()
-				out += "\n\n"
 			except:
 				pass
 		except:
