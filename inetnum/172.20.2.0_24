@@ -1,0 +1,8 @@
+inetnum:	172.20.2.0 - 172.20.2.255
+nserver:	172.20.2.1
+status:		ASSIGNED
+country:	DE
+admin-c:	FRITZ-GEHEIM
+tech-c:		FRITZ-GEHEIM
+netname:	FRITZ-PROFESSIONAL-NET
+descr:		Here are my professional maintained services!
