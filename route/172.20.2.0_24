@@ -1,0 +1,3 @@
+route:		172.20.2.0/24
+descr:		Grimpen Enterprise Networks
+origin:		AS64712
